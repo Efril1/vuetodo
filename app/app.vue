@@ -17,12 +17,22 @@ onMounted(() => {
 
 <template>
   <div class="min-h-screen flex flex-col items-center justify-center p-4">
-    <div class="absolute top-10 flex items-center gap-1">
-      <TodoToggletheme />
-      <span class="text-xl font-bold text-White-800">Todo</span>
+    <div class="absolute top-10 flex flex-col items-center gap-1">
+      <div class="flex items-center gap-1">
+        <TodoToggletheme />
+
+        <span class="text-xl font-bold text-gray-800 dark:text-gray-200">Todo</span>
+        <a
+          href="https://github.com/Efril1"
+          target="_blank"
+          class="mt-1 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+        >
+          <UIcon name="i-lucide-github" class="w-10 h-6" />
+        </a>
+      </div>
     </div>
 
-    <div class="w-full max-w-md space-y-4">
+    <div class="w-full max-w-md space-y-4 mt-16">
       <div class="flex gap-2 w-full">
         <UInput
           v-model="newTodo"
@@ -30,9 +40,7 @@ onMounted(() => {
           class="flex-1"
           @keyup.enter="addTodo"
         />
-        <UButton
-          @click="addTodo"
-        >
+        <UButton @click="addTodo">
           Add
         </UButton>
       </div>
