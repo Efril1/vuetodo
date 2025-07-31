@@ -36,7 +36,7 @@ const addTodo = () => {
         v-for="todo in store.todos" 
         :key="todo.id"
         :todo="todo"
-      />
+      />  <!-- v-for array döngüsü-->
     </ul>
     
     <TodoFooter />

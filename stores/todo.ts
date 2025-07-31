@@ -19,11 +19,11 @@ export const useTodoStore = defineStore('todo', {
       })
     },
     toggleTodo(id: number) {
-      const todo = this.todos.find(t => t.id === id)
+      const todo = this.todos.find(todo => todo.id === id)
       if (todo) todo.completed = !todo.completed
     },
     editTodo(id: number, editedText: string) {
-        const todo = this.todos.find(t => t.id === id)
+        const todo = this.todos.find(todo => todo.id === id)
         if (todo) todo.text = editedText
       },
     deleteTodo(id: number) {
