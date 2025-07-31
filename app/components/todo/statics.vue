@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useTodoStore } from '../../stores/todo'
 const store = useTodoStore()
 </script>
 

@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import TodoList from './components/TodoList.vue'
+
+const todoStore = useTodoStore()
+onMounted(() => {
+  todoStore.getTodos()
+})
 </script>
 
 <template>

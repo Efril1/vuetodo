@@ -2,13 +2,12 @@
 defineProps<{
   id: number
 }>()
-import { useTodoStore } from '../../stores/todo'
-const store = useTodoStore()
+const todoStore = useTodoStore()
 </script>
 
 <template>
   <button
-    @click="store.deleteTodo(id)"
+    @click="todoStore.deleteTodo(id)"
     class="text-red-500 hover:text-red-700"
   >
     Delete
