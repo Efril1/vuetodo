@@ -8,6 +8,9 @@ function addTodo() {
     newTodo.value = ''
   }
 }
+onMounted(() => {
+  store.getTodos()
+})
 </script>
 
 <template>
