@@ -3,10 +3,11 @@ const store = useTodoStore()
 </script>
 
 <template>
-  <button
-    class="text-sm text-red-500 hover:text-red-700"
+  <UButton
+    color="error"
+    variant="ghost"
+    size="sm"
+    label="Clear Completed"
     @click="store.clearCompleted()"
-  >
-    Clear Completed
-  </button>
+  />
 </template>

@@ -25,39 +25,41 @@ function cancelEdit() {
 </script>
 
 <template>
-  <li class="flex items-center gap-2 p-2 border-b">
-    <input
-      type="checkbox"
-      :checked="todo.completed"
-      class="h-5 w-5"
-      @change="store.toggleTodo(todo.id)"
-    >
-
-    <span
-      v-if="!isEditing"
-      :class="{ 'line-through': todo.completed }"
-      class="flex-1 cursor-pointer"
-      @dblclick="startEditing"
-    >
-      {{ todo.text }}
-    </span>
-
-    <div v-else class="flex-1 flex gap-2">
-      <input
-        v-model="editText"
-        class="flex-1 p-1 border rounded"
-        type="text"
-        @keyup.enter="saveEdit"
-        @blur="saveEdit"
+  <UCard
+    class="mb-2 "
+  >
+    <div class="flex items-center gap-2">
+      <UCheckbox
+        :model-value="todo.completed"
+        @change="store.toggleTodo(todo.id)"
+      />
+      <span
+        v-if="!isEditing"
+        :class="{ 'line-through': todo.completed }"
+        class="flex-1 cursor-pointer"
+        @dblclick="startEditing"
       >
-      <button
-        class="px-2 text-gray-500 hover:text-gray-700"
-        @click="cancelEdit"
-      >
-        ✕
-      </button>
+        {{ todo.text }}
+      </span>
+
+      <div v-else class="flex-1 flex gap-2">
+        <UInput
+          v-model="editText"
+          type="text"
+          autofocus
+          @keyup.enter="saveEdit"
+          @blur="saveEdit"
+        />
+        <UButton
+          variant="ghost"
+          color="error"
+          @click="cancelEdit"
+        >
+          ✕
+        </UButton>
+      </div>
+
+      <TodoDeleteButton :id="todo.id" />
     </div>
-
-    <TodoDeleteButton :id="todo.id" class="ml-2" />
-  </li>
+  </UCard>
 </template>

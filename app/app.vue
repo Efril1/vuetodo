@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { TodoToggletheme } from '#components'
+
 const store = useTodoStore()
 const newTodo = ref('')
 
@@ -14,30 +16,38 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="max-w-md mx-auto">
-    <div class="flex gap-2 mb-4">
-      <input
-        v-model="newTodo"
-        placeholder="Add new todo..."
-        class="flex-1 p-2 border rounded"
-        @keyup.enter="addTodo"
-      >
-      <button
-        class="bg-blue-500 text-white px-4 py-2 rounded"
-        @click="addTodo"
-      >
-        Add
-      </button>
+  <div class="min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="absolute top-10 flex items-center gap-1">
+      <TodoToggletheme />
+      <span class="text-xl font-bold text-White-800">Todo</span>
     </div>
 
-    <ul class="border rounded divide-y">
-      <TodoItem
-        v-for="todo in store.todos"
-        :key="todo.id"
-        :todo="todo"
-      />  <!-- v-for array döngüsü -->
-    </ul>
+    <div class="w-full max-w-md space-y-4">
+      <div class="flex gap-2 w-full">
+        <UInput
+          v-model="newTodo"
+          placeholder="Add new todo..."
+          class="flex-1"
+          @keyup.enter="addTodo"
+        />
+        <UButton
+          @click="addTodo"
+        >
+          Add
+        </UButton>
+      </div>
 
-    <TodoFooter />
+      <UCard class="w-full">
+        <div>
+          <TodoItem
+            v-for="todo in store.todos"
+            :key="todo.id"
+            :todo="todo"
+          />
+        </div>
+      </UCard>
+
+      <TodoFooter />
+    </div>
   </div>
 </template>
