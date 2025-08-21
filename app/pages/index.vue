@@ -19,7 +19,12 @@ const columns: TableColumn<User>[] = [
   },
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'email', header: 'Email' },
-  { accessorKey: 'address', header: 'address' },
+  {
+    id: 'address',
+    header: 'address',
+    cell: ({ row }) =>
+      `${row.original.address.city}, ${row.original.address.country}`,
+  },
   { accessorKey: 'phone', header: 'phone' },
 
   { accessorKey: 'role', header: 'Role' },
@@ -34,7 +39,7 @@ const columns: TableColumn<User>[] = [
     <UTable
       :data="userStore.users"
       :columns="columns"
-      class="flex-1"
+      class="flex"
       @select="onSelect"
     />
   </div>
