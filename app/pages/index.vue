@@ -12,7 +12,7 @@ function onSelect(row: TableRow<User>) {
 const columns: TableColumn<User>[] = [
   { accessorKey: 'id', header: 'id' },
   {
-    id: 'avatar',
+    accessorKey: 'avatar',
     header: '',
     cell: ({ row }) =>
       h(resolveComponent('UAvatar'), { src: row.original.avatar, size: 'xs' }),
@@ -20,13 +20,14 @@ const columns: TableColumn<User>[] = [
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'email', header: 'Email' },
   {
-    id: 'address',
+    accessorKey: 'address',
     header: 'address',
     cell: ({ row }) =>
       `${row.original.address.city}, ${row.original.address.country}`,
   },
   { accessorKey: 'phone', header: 'phone' },
-
+  { accessorKey: 'registeredAt', header: 'registeredAt' },
+  { accessorKey: 'active', header: 'active' },
   { accessorKey: 'role', header: 'Role' },
 ]
 </script>
