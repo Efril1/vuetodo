@@ -1,5 +1,10 @@
 <script setup lang="ts">
+const props = defineProps<{ userId: number }>()
 const store = useTodoStore()
+
+function clearCompleted() {
+  store.clearCompleted(props.userId)
+}
 </script>
 
 <template>
@@ -8,6 +13,6 @@ const store = useTodoStore()
     variant="ghost"
     size="sm"
     label="Clear Completed"
-    @click="store.clearCompleted()"
+    @click="clearCompleted"
   />
 </template>

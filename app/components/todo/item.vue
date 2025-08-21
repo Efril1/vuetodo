@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   todo: Todo
+  userId: number
 }>()
 
 const store = useTodoStore()
@@ -14,7 +15,7 @@ function startEditing() {
 
 function saveEdit() {
   if (editText.value.trim()) {
-    store.editTodo(props.todo.id, editText.value.trim())
+    store.editTodo(props.userId, props.todo.id, editText.value.trim())
     isEditing.value = false
   }
 }
@@ -22,20 +23,22 @@ function saveEdit() {
 function cancelEdit() {
   isEditing.value = false
 }
+
+function toggleTodo() {
+  store.toggleTodo(props.userId, props.todo.id) // pass userId
+}
 </script>
 
 <template>
-  <UCard
-    class="mb-2 "
-  >
+  <UCard class="mb-2">
     <div class="flex items-center gap-2">
       <UCheckbox
         :model-value="todo.completed"
-        @change="store.toggleTodo(todo.id)"
+        @change="toggleTodo"
       />
       <span
         v-if="!isEditing"
-        :class="{ 'line-through': todo.completed }"
+        :class="{ 'text-gray-800': todo.completed }"
         class="flex-1 cursor-pointer"
         @dblclick="startEditing"
       >
@@ -46,20 +49,17 @@ function cancelEdit() {
         <UInput
           v-model="editText"
           type="text"
+          class="flex-1 py-1.5 h-10 text-base"
           autofocus
           @keyup.enter="saveEdit"
           @blur="saveEdit"
         />
-        <UButton
-          variant="ghost"
-          color="error"
-          @click="cancelEdit"
-        >
+        <UButton variant="ghost" color="error" @click="cancelEdit">
           ✕
         </UButton>
       </div>
 
-      <TodoDeleteButton :id="todo.id" />
+      <TodoDeleteButton :id="todo.id" :user-id="props.userId" />
     </div>
   </UCard>
 </template>
