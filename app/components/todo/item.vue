@@ -54,9 +54,7 @@ function toggleTodo() {
           @keyup.enter="saveEdit"
           @blur="saveEdit"
         />
-        <UButton variant="ghost" color="error" @click="cancelEdit">
-          ✕
-        </UButton>
+        <UButton icon="lucide:x" variant="ghost" color="error" @click="cancelEdit" />
       </div>
 
       <TodoDeleteButton :id="todo.id" :user-id="props.userId" />

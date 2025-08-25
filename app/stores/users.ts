@@ -1,18 +1,3 @@
-export interface User {
-  id: number
-  name: string
-  email: string
-  avatar: string
-  role: string
-  registeredAt: string
-  phone: string
-  active: boolean
-  address: {
-    city: string
-    country: string
-  }
-}
-
 export const useUserStore = defineStore('user', () => {
   const users = ref<User[]>([])
 
@@ -23,9 +8,12 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
-  function getUserById(id: number) {
-    return users.value.find(u => u.id === id)
+  function getUserById(id: number): User {
+    const user = users.value.find(u => u.id === id)
+    if (!user) throw new Error(`User ${id} not found`)
+    return user
   }
+  
 
   return {
     users,

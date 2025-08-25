@@ -42,6 +42,15 @@ const columns: TableColumn<User>[] = [
       :columns="columns"
       class="flex"
       @select="onSelect"
-    />
+    >
+      <template #active-cell="{ getValue }">
+        <div
+          class="w-2 h-2 rounded-full" :class="{
+            'bg-red-500': !getValue(),
+            'bg-green-500': getValue(),
+          }"
+        />
+      </template>
+    </UTable>
   </div>
 </template>
