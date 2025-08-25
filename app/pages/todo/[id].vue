@@ -26,6 +26,13 @@ const userTodos = computed(() => store.todos[userId] ?? [])
 </script>
 
 <template>
+  <UButton
+    icon="i-lucide-github"
+    class="absolute top-0 right-0 m-3"
+    color="neutral"
+    to="https://github.com/Efril1"
+    variant="ghost"
+  />
   <ClientOnly>
     <div class="min-h-screen flex flex-col items-center p-4">
       <div class="absolute top-10 flex flex-col items-center gap-1">
@@ -44,13 +51,6 @@ const userTodos = computed(() => store.todos[userId] ?? [])
               Todo
             </ULink>
           </div>
-          <UButton
-            icon="i-lucide-github"
-            class="ml-1"
-            color="neutral"
-            to="https://github.com/Efril1"
-            variant="ghost"
-          />
         </div>
       </div>
 

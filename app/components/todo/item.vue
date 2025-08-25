@@ -25,7 +25,7 @@ function cancelEdit() {
 }
 
 function toggleTodo() {
-  store.toggleTodo(props.userId, props.todo.id) // pass userId
+  store.toggleTodo(props.userId, props.todo.id)
 }
 </script>
 
@@ -36,10 +36,11 @@ function toggleTodo() {
         :model-value="todo.completed"
         @change="toggleTodo"
       />
+
       <span
         v-if="!isEditing"
-        :class="{ 'text-gray-800': todo.completed }"
         class="flex-1 cursor-pointer"
+        :class="[todo.completed ? 'text-primary' : '']"
         @dblclick="startEditing"
       >
         {{ todo.text }}
@@ -57,7 +58,13 @@ function toggleTodo() {
         <UButton icon="lucide:x" variant="ghost" color="error" @click="cancelEdit" />
       </div>
 
-      <TodoDeleteButton :id="todo.id" :user-id="props.userId" />
+      <UButton
+        v-if="!isEditing"
+        icon="lucide:pencil"
+        variant="ghost"
+        color="primary"
+        @click="startEditing"
+      />
     </div>
   </UCard>
 </template>
