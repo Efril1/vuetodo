@@ -7,15 +7,19 @@ const router = useRouter()
 const userStore = useUserStore()
 const isLoading = ref(true)
 
-try {
-  await userStore.fetchUsers()
+async function initialize() {
+  try {
+    await userStore.fetchUsers()
+  }
+  catch (error) {
+    console.error('Failed to fetch users:', error)
+  }
+  finally {
+    isLoading.value = false
+  }
 }
-catch (error) {
-  console.error('Failed to fetch users:', error)
-}
-finally {
-  isLoading.value = false
-}
+
+initialize()
 
 function onSelect(row: TableRow<User>) {
   router.push({

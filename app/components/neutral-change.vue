@@ -17,8 +17,8 @@ function setNeutralToColor(color: string) {
 
 <template>
   <UButtonGroup orientation="horizontal">
-    <UButton label="Stone" @click="setNeutralToColor('stone')" />
-    <UButton label="Zinc" @click="setNeutralToColor('zinc')" />
-    <UButton label="Gray" @click="setNeutralToColor('gray')" />
+    <UButton label="Stone" color="stone" @click="setNeutralToColor('stone')" />
+    <UButton label="Zinc" color="zinc" @click="setNeutralToColor('zinc')" />
+    <UButton label="Gray" color="gray" @click="setNeutralToColor('gray')" />
   </UButtonGroup>
 </template>
