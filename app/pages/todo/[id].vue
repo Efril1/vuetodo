@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  name: 'todo',
+})
+
 const route = useRoute()
 const userId = Number(route.params.id)
 const store = useTodoStore()
@@ -23,7 +27,7 @@ const userTodos = computed(() => store.todos[userId] ?? [])
 
 <template>
   <ClientOnly>
-    <div class="min-h-screen flex flex-col items-center p-4 bg-gray-50 dark:bg-gray-900">
+    <div class="min-h-screen flex flex-col items-center p-4">
       <div class="absolute top-10 flex flex-col items-center gap-1">
         <div class="flex items-center gap-1">
           <TodoToggletheme />

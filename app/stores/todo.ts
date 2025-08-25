@@ -1,11 +1,10 @@
 export const useTodoStore = defineStore('todo', () => {
-
   const todos = ref<Record<number, Todo[]>>({})
 
-  function addTodo(req: { userId: number; text: string }) {
+  function addTodo(req: { userId: number, text: string }) {
     if (!todos.value[req.userId])
       todos.value[req.userId] = []
-      todos.value[req.userId]?.push({
+    todos.value[req.userId]?.push({
       id: Date.now(),
       text: req.text,
       completed: false,
@@ -17,8 +16,9 @@ export const useTodoStore = defineStore('todo', () => {
     const stored = localStorage.getItem(`todos-${userId}`)
     try {
       todos.value[userId] = stored ? JSON.parse(stored) : []
-    } catch (e) {
-      console.error('Invalid todos in localStorage', e)
+    }
+    catch (e) {
+      console.error('Invalid todos', e)
       todos.value[userId] = []
     }
   }

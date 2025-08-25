@@ -1,12 +1,35 @@
 <script setup lang="ts">
 import type { TableColumn, TableRow } from '@nuxt/ui'
+import { UButton, UIcon } from '#components'
+import { ref } from 'vue'
 
 const router = useRouter()
 const userStore = useUserStore()
-await userStore.fetchUsers()
+const isLoading = ref(true)
+
+try {
+  await userStore.fetchUsers()
+}
+catch (error) {
+  console.error('Failed to fetch users:', error)
+}
+finally {
+  isLoading.value = false
+}
 
 function onSelect(row: TableRow<User>) {
-  router.push(`/todo/${row.original.id}`)
+  router.push({
+    name: 'todo',
+    params: { id: row.getValue('id') },
+  })
+}
+
+function formatDate(dateString: string) {
+  const date = new Date(dateString)
+  const day = date.getDate()
+  const month = date.toLocaleString('tr-TR', { month: 'long' })
+  const year = date.getFullYear()
+  return `${day} ${month} ${year}`
 }
 
 const columns: TableColumn<User>[] = [
@@ -26,31 +49,44 @@ const columns: TableColumn<User>[] = [
       `${row.original.address.city}, ${row.original.address.country}`,
   },
   { accessorKey: 'phone', header: 'phone' },
-  { accessorKey: 'registeredAt', header: 'registeredAt' },
+  {
+    accessorKey: 'registeredAt',
+    header: 'registeredAt',
+    cell: ({ row }) => formatDate(row.original.registeredAt),
+  },
   { accessorKey: 'active', header: 'active' },
   { accessorKey: 'role', header: 'Role' },
 ]
 </script>
 
 <template>
-  <div class="p-6">
-    <h1 class="flex text-xl font-bold justify-center">
-      Users Table
-    </h1>
-    <UTable
-      :data="userStore.users"
-      :columns="columns"
-      class="flex"
-      @select="onSelect"
-    >
-      <template #active-cell="{ getValue }">
-        <div
-          class="w-2 h-2 rounded-full" :class="{
-            'bg-red-500': !getValue(),
-            'bg-green-500': getValue(),
-          }"
-        />
-      </template>
-    </UTable>
+  <div v-if="isLoading" class="p-6 text-center font-bold">
+    <div class="animate-spin inline-block size-6 border-3 border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500" role="status" aria-label="loading" />
+  </div>
+
+  <div v-else>
+    <PrimaryChange class="absolute right-20 mt-5 " />
+    <NeutralChange class="absolute right-65 mt-5 " />
+
+    <div class="p-6">
+      <UButton color="primary" variant="link" class="flex text-xl font-bold justify-center mx-auto">
+        Users Table
+      </UButton>
+      <UTable
+        :data="userStore.users"
+        :columns="columns"
+        class="flex"
+        @select="onSelect"
+      >
+        <template #active-cell="{ getValue }">
+          <div
+            class="w-2 h-2 rounded-full" :class="{
+              'bg-red-500': !getValue(),
+              'bg-green-500': getValue(),
+            }"
+          />
+        </template>
+      </UTable>
+    </div>
   </div>
 </template>

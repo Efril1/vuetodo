@@ -10,10 +10,10 @@ export const useUserStore = defineStore('user', () => {
 
   function getUserById(id: number): User {
     const user = users.value.find(u => u.id === id)
-    if (!user) throw new Error(`User ${id} not found`)
+    if (!user)
+      throw new Error(`User ${id} not found`)
     return user
   }
-  
 
   return {
     users,
