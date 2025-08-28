@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { TableColumn, TableRow } from '@nuxt/ui'
-import { UButton, UIcon } from '#components'
-import { ref } from 'vue'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -26,14 +24,6 @@ function onSelect(row: TableRow<User>) {
     name: 'todo',
     params: { id: row.getValue('id') },
   })
-}
-
-function formatDate(dateString: string) {
-  const date = new Date(dateString)
-  const day = date.getDate()
-  const month = date.toLocaleString('tr-TR', { month: 'long' })
-  const year = date.getFullYear()
-  return `${day} ${month} ${year}`
 }
 
 const columns: TableColumn<User>[] = [
@@ -79,7 +69,6 @@ const columns: TableColumn<User>[] = [
       <UTable
         :data="userStore.users"
         :columns="columns"
-        class="flex"
         @select="onSelect"
       >
         <template #active-cell="{ getValue }">

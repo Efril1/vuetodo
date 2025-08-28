@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { updateAppConfig, useAppConfig } from '#app'
-import { watch } from 'vue'
-
 const appConfig = useAppConfig()
 const colorCookie = useCookie<string>('primary_color')
 

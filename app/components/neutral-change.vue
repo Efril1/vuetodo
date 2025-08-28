@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { updateAppConfig } from '#app'
-
 const neutralCookie = useCookie<string>('neutral_color')
 
 function setNeutralToColor(color: string) {
@@ -13,10 +11,12 @@ function setNeutralToColor(color: string) {
   })
   neutralCookie.value = color
 }
+const config = useAppConfig()
+config.ui.colors.primary = 'red'
 </script>
 
 <template>
-  <UButtonGroup orientation="horizontal">
+  <UButtonGroup orientation="horizontal" class="">
     <UButton label="Stone" color="stone" @click="setNeutralToColor('stone')" />
     <UButton label="Zinc" color="zinc" @click="setNeutralToColor('zinc')" />
     <UButton label="Gray" color="gray" @click="setNeutralToColor('gray')" />

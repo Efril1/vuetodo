@@ -1,3 +1,4 @@
+import process from 'node:process'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import tailwindcss from '@tailwindcss/vite'
 
@@ -30,6 +31,10 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
-
+  runtimeConfig: {
+    public: {
+      TODO_PREFIX: process.env.NUXT_PUBLIC_TODO_PREFIX || 'todos-',
+    },
+  },
   modules: ['@pinia/nuxt', '@nuxt/ui'],
 })

@@ -30,41 +30,43 @@ function toggleTodo() {
 </script>
 
 <template>
-  <UCard class="mb-2">
-    <div class="flex items-center gap-2">
-      <UCheckbox
-        :model-value="todo.completed"
-        @change="toggleTodo"
+  <UListItem
+    class="rounded-lg px-3 py-2 flex items-center gap-2 hover:bg-gray-900 transition cursor-pointer"
+    :class="[{ 'opacity-60': todo.completed }]"
+    @click="toggleTodo"
+  >
+    <UCheckbox
+      :model-value="todo.completed"
+      class="pointer-events-none"
+    />
+
+    <span
+      v-if="!isEditing"
+      class="flex-1"
+      :class="{ 'line-through': todo.completed }"
+      @dblclick.stop="startEditing"
+    >
+      {{ todo.text }}
+    </span>
+
+    <div v-else class="flex-1 flex gap-2" @click.stop>
+      <UInput
+        v-model="editText"
+        type="text"
+        class="flex-1 py-1.5 h-10 text-base"
+        autofocus
+        @keyup.enter="saveEdit"
+        @blur="saveEdit"
       />
-
-      <span
-        v-if="!isEditing"
-        class="flex-1 cursor-pointer"
-        :class="[todo.completed ? 'text-primary' : '']"
-        @dblclick="startEditing"
-      >
-        {{ todo.text }}
-      </span>
-
-      <div v-else class="flex-1 flex gap-2">
-        <UInput
-          v-model="editText"
-          type="text"
-          class="flex-1 py-1.5 h-10 text-base"
-          autofocus
-          @keyup.enter="saveEdit"
-          @blur="saveEdit"
-        />
-        <UButton icon="lucide:x" variant="ghost" color="error" @click="cancelEdit" />
-      </div>
-
-      <UButton
-        v-if="!isEditing"
-        icon="lucide:pencil"
-        variant="ghost"
-        color="primary"
-        @click="startEditing"
-      />
+      <UButton icon="lucide:x" variant="ghost" color="error" @click="cancelEdit" />
     </div>
-  </UCard>
+
+    <UButton
+      v-if="!isEditing"
+      icon="lucide:pencil"
+      variant="ghost"
+      color="primary"
+      @click.stop="startEditing"
+    />
+  </UListItem>
 </template>

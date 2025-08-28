@@ -1,5 +1,7 @@
 export const useTodoStore = defineStore('todo', () => {
   const todos = ref<Record<number, Todo[]>>({})
+  const config = useRuntimeConfig()
+  const prefix = config.public.TODO_PREFIX
 
   function addTodo(req: { userId: number, text: string }) {
     if (!todos.value[req.userId])
@@ -13,7 +15,7 @@ export const useTodoStore = defineStore('todo', () => {
   }
 
   function getTodos(userId: number) {
-    const stored = localStorage.getItem(`todos-${userId}`)
+    const stored = localStorage.getItem(`${prefix}${userId}`)
     try {
       todos.value[userId] = stored ? JSON.parse(stored) : []
     }
@@ -50,7 +52,7 @@ export const useTodoStore = defineStore('todo', () => {
   }
 
   function saveTodos(userId: number) {
-    localStorage.setItem(`todos-${userId}`, JSON.stringify(todos.value[userId] || []))
+    localStorage.setItem(`${prefix}${userId}`, JSON.stringify(todos.value[userId] || []))
   }
 
   const completedCount = (userId: number) =>
