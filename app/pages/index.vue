@@ -55,13 +55,10 @@ const columns: TableColumn<User>[] = [
 
 <template>
   <div v-if="isLoading" class="p-6 text-center font-bold">
-    <div class="animate-spin inline-block size-6 border-3 border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500" role="status" aria-label="loading" />
+    <div class="animate-spin inline-block size-6 border-3 border-current border-t-transparent text-primary rounded-full dark:text-primary" role="status" aria-label="loading" />
   </div>
 
   <div v-else>
-    <PrimaryChange class="absolute right-20 mt-5 " />
-    <NeutralChange class="absolute right-65 mt-5 " />
-
     <div class="p-6">
       <UButton color="primary" variant="link" class="flex text-xl font-bold justify-center mx-auto">
         Users Table

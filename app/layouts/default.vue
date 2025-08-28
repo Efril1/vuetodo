@@ -29,6 +29,9 @@
         variant="ghost"
       />
     </div>
+
+    <PrimaryChange class="absolute right-20 mt-5 " />
+    <NeutralChange class="absolute right-65 mt-5 " />
   </header>
 
   <main class="min-h-screen flex flex-col items-center p-4">
