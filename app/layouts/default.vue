@@ -1,10 +1,8 @@
 <template>
-  <header class="flex justify-between items-center p-3">
-    <div class="flex items-center gap-2">
+  <header class="relative flex justify-between items-center p-3">
+    <div class="flex items-center gap-4">
       <TodoToggletheme />
-    </div>
 
-    <div class="flex-1 flex justify-center">
       <div class="inline-block hover:[&>span:first-child]:opacity-90">
         <span
           class="absolute ml-2 blur-sm opacity-0 hover:opacity-90 scale-200 transition-all duration-300 pointer-events-none"
@@ -20,21 +18,21 @@
       </div>
     </div>
 
-    <div>
+    <div class="flex items-center gap-x-2">
+      <PrimaryChange />
+      <NeutralChange />
       <UButton
         icon="i-lucide-github"
         color="neutral"
-        class="absolute right-1 top-2"
         to="https://github.com/Efril1"
         variant="ghost"
       />
     </div>
-
-    <PrimaryChange class="absolute right-20 mt-5 " />
-    <NeutralChange class="absolute right-65 mt-5 " />
   </header>
 
   <main class="min-h-screen flex flex-col items-center p-4">
-    <slot />
+    <div class="w-full overflow-x-auto">
+      <slot />
+    </div>
   </main>
 </template>
