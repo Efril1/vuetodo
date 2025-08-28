@@ -1,5 +1,4 @@
-todo app with nuxt
-
+## Nuxt Todo app
 .env content:
 
 NUXT_APP_NAME=Todo App
