@@ -31,7 +31,7 @@ function toggleTodo() {
 
 <template>
   <UListItem
-    class="rounded-lg px-3 py-2 flex items-center gap-2 hover:bg-gray-900 transition cursor-pointer"
+    class="rounded-lg px-3 py-2 flex items-center gap-2 hover:bg-gray-800 transition cursor-pointer"
     :class="[{ 'opacity-60': todo.completed }]"
     @click="toggleTodo"
   >
