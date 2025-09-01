@@ -27,7 +27,7 @@ const userTodos = computed(() => store.todos[userId] ?? [])
 
 <template>
   <ClientOnly>
-    <div class="w-full max-w-md space-y-4 mt-16">
+    <div class="w-full max-w-md space-y-4 mt-16 mx-auto">
       <div class="flex gap-2 w-full">
         <UInput
           v-model="newTodo"
